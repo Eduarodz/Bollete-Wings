@@ -1,8 +1,10 @@
+#include <Arduino.h>
+
 
 #include <Keyboard.h>
 #include <Mouse.h>
 
-// Hardware Setup:
+/* Hardware Setup: */
 const int left_knob_sensor = A0;
 const int right_knob_sensor = A1; 
 
@@ -15,7 +17,7 @@ const int buttonPin5 = 6;
 const int ledPin = 13; // integrated LED
 
 
-// Operation Monitor:
+/* States and Sensor Data */ 
 int left_knob = 0;
 int right_knob = 0;
 int button1 = 0;
