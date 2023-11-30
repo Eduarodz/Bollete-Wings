@@ -1,8 +1,12 @@
-#include <Arduino.h>
+
+/*
+ * Project Link:
+ * https://wokwi.com/projects/382797676467040257
+ *
+ */
 
 
-#include <Keyboard.h>
-#include <Mouse.h>
+bool simulation = true;
 
 /* Hardware Setup: */
 const int left_knob_sensor = A0;
@@ -20,6 +24,7 @@ const int ledPin = 13; // integrated LED
 /* States and Sensor Data */ 
 int left_knob = 0;
 int right_knob = 0;
+
 int button1 = 0;
 int button2 = 0;
 int button3 = 0;
@@ -39,22 +44,22 @@ void setup() {
 
   Serial.begin(9600); //TODO: Needed?leave:remove;
 
-  Mouse.begin();
-  Keyboard.begin();
+  //Mouse.begin();
+  //Keyboard.begin();
 }
 
-void readButtons();
-void readKnobs();
+void readKnobs(){
+  left_knob = analogRead(left_knob_sensor);
+  right_knob = analogRead(right_knob_sensor);
 
-void loop() {
-  readKnobs();
-  readButtons();
+  if(simulation){
+    Serial.print("Left: ");
+    Serial.print(left_knob);
+    Serial.print("\tRight: ");
+    Serial.print(right_knob);
+    Serial.print("\n");
+  }
 
-  write_KbMap(button1, '1');
-  write_KbMap(button2, '2');
-  write_KbMap(button3, '3');
-  write_KbMap(button4, '4');
-  write_KbMap(button5, 'g');
 }
 
 void readButtons(){
@@ -65,13 +70,26 @@ void readButtons(){
   button5 = digitalRead(buttonPin5);
 }
 
-void readKnobs(){
-  left_knob = analogRead(left_knob_sensor);
-  right_knob = analogRead(right_knob_sensor);
-}
-
 void write_KbMap(int button, char keboard_letter){
-    if (button == HIGH) {
-      Keyboard.write('keboard_letter');
+  if (button == HIGH) {
+    //Keyboard.write('keboard_letter');
+    if(simulation){
+      Serial.print("\n\t\t\t");
+      Serial.print(keboard_letter);
+      Serial.print("\n");
+    }
   }
 }
+
+void loop() {
+
+  readKnobs();
+  readButtons();
+
+  write_KbMap(button1, '1');
+  write_KbMap(button2, '2');
+  write_KbMap(button3, '3');
+  write_KbMap(button4, '4');
+  write_KbMap(button5, 'g');
+}
+
