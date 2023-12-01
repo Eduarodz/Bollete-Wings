@@ -5,40 +5,77 @@
 
 #include "main.h"
 
-// put function declarations here:
-int myFunction(int, int);
-
 void setup() {
 
-  int i;
+  Serial.begin(9600);
 
-/* Initialize Pins for Button Inputs */
-  for (i = 0; i < (sizeof(ButtonInputs) / sizeof(ButtonInputs[0])); ++i)
-  {
-      pinMode(ButtonInputs[i], INPUT);
-      printf(ButtonInputs[i]);
-  }
-
-/* Initialize Pins for Knob Inputs */
-  for (i = 0; i < (sizeof(KnobInputs) / sizeof(KnobInputs[0])); ++i)
-  {
-      pinMode(KnobInputs[i], INPUT);
-      printf(KnobInputs[i]);
-  }
-
-/* Initialize Pins for Toggle Inputs */
-  for (i = 0; i < (sizeof(ToggleInputs) / sizeof(ToggleInputs[0])); ++i)
-  {
-      pinMode(ToggleInputs[i], INPUT);
-      printf(ToggleInputs[i]);
-  }  
+  Keyboard.begin();
+  InitializePinModes();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  
+  ReadInputsSendOuput();
+  
 }
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+void ReadInputsSendOuput(void)
+{
+  int i;
+
+  for (i = 0; i < Button.NumOfInputs; i++)
+  {
+    if (digitalRead(Button.InputPin[i]) == LOW)
+    {
+      Keyboard.write(Button.KeyboardMapping[i]);
+    }
+    else
+    {
+      Keyboard.release(Button.KeyboardMapping[i]);
+    }
+  }
+
+  for (i = 0; i < Knob.NumOfInputs; i++)
+  {
+    if (digitalRead(Knob.InputPin[i]) == LOW)
+    {
+      Keyboard.write(Knob.KeyboardMapping[i]);
+    }
+    else
+    {
+      Keyboard.release(Knob.KeyboardMapping[i]);
+    }
+  }
+
+  for (i = 0; i < Toggle.NumOfInputs; i++)
+  {
+    if (digitalRead(Toggle.InputPin[i]) == LOW)
+    {
+      Keyboard.write(Toggle.KeyboardMapping[i]);
+    }
+    else
+    {
+      Keyboard.release(Toggle.KeyboardMapping[i]);
+    }
+  }
+}
+
+void InitializePinModes(void)
+{
+  int i;
+
+  for (i = 0; i < Button.NumOfInputs; i++)
+  {
+    pinMode(Button.InputPin[i], INPUT);
+  }
+
+  for (i = 0; i < Knob.NumOfInputs; i++)
+  {
+    pinMode(Knob.InputPin[i], INPUT);
+  }
+
+  for (i = 0; i < Toggle.NumOfInputs; i++)
+  {
+    pinMode(Toggle.InputPin[i], INPUT);
+  }
 }
