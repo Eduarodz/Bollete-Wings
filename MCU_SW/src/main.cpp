@@ -16,7 +16,7 @@ void setup() {
 void loop() {
   
   ReadInputsSendOuput();
-  
+
 }
 
 void ReadInputsSendOuput(void)
@@ -27,7 +27,7 @@ void ReadInputsSendOuput(void)
   {
     if (digitalRead(Button.InputPin[i]) == LOW)
     {
-      Keyboard.write(Button.KeyboardMapping[i]);
+      Keyboard.press(Button.KeyboardMapping[i]);
     }
     else
     {
@@ -39,7 +39,7 @@ void ReadInputsSendOuput(void)
   {
     if (digitalRead(Knob.InputPin[i]) == LOW)
     {
-      Keyboard.write(Knob.KeyboardMapping[i]);
+      Keyboard.press(Knob.KeyboardMapping[i]);
     }
     else
     {
@@ -51,7 +51,7 @@ void ReadInputsSendOuput(void)
   {
     if (digitalRead(Toggle.InputPin[i]) == LOW)
     {
-      Keyboard.write(Toggle.KeyboardMapping[i]);
+      Keyboard.press(Toggle.KeyboardMapping[i]);
     }
     else
     {
@@ -66,16 +66,16 @@ void InitializePinModes(void)
 
   for (i = 0; i < Button.NumOfInputs; i++)
   {
-    pinMode(Button.InputPin[i], INPUT);
+    pinMode(Button.InputPin[i], INPUT_PULLUP);
   }
 
   for (i = 0; i < Knob.NumOfInputs; i++)
   {
-    pinMode(Knob.InputPin[i], INPUT);
+    pinMode(Knob.InputPin[i], INPUT_PULLUP);
   }
 
   for (i = 0; i < Toggle.NumOfInputs; i++)
   {
-    pinMode(Toggle.InputPin[i], INPUT);
+    pinMode(Toggle.InputPin[i], INPUT_PULLUP);
   }
 }
