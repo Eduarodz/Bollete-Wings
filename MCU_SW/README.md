@@ -1,4 +1,6 @@
-# Keyboard Controller Project
+# BolleteWing Switch Panel
+
+BolleteWing is a project aimed at designing a switch panel for use in popular flight simulation games, specifically "Microsoft Flight Simulator" and "Digital Combat Simulator" (DCS). The switch panel is intended to enhance the gaming experience by providing a physical interface for controlling various in-game functions.
 
 This project implements a simple keyboard controller using an Arduino board. The main functionality revolves around a scheduler, which is defined in the `main.cpp` file. Additionally, calibration parameters and pin configurations are stored in the `calibrations.h` file, and the overall project structure is orchestrated by the `main.h` header file.
 
