@@ -4,13 +4,13 @@
 */
 
 /*
-    Include
+    Include Declarations
 */
 
 #include "Arduino.h"
 
 /*
-    Struct Definitions
+    Struct Declarations
 */
 
 struct HWIO
@@ -32,4 +32,4 @@ struct HWIO
 /* Panel Toggles */
     HWIO Toggle = {2, {"Flaps", "LandingGear"}, {8, 9}, {'f', 'd'}};
 /* Panel On/Off Switch */
-    extern const int powerpin = 10;
+    extern const int KeyboardActivePin = 10;

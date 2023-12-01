@@ -81,14 +81,14 @@ void Initialize_PinModes(void)
     pinMode(Toggle.InputPin[i], INPUT_PULLUP);
   }
 
-  pinMode(powerpin, INPUT_PULLUP);
+  pinMode(KeyboardActivePin, INPUT_PULLUP);
 }
 
 bool Dtrmn_b_KeyboardActive(void)
 {
   bool KeyboardActive;
 
-  if(digitalRead(powerpin) == LOW)
+  if(digitalRead(KeyboardActivePin) == LOW)
   {
     Keyboard.begin();
     KeyboardActive = true;
