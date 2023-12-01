@@ -1,6 +1,7 @@
 /* 
     File name:      main.cpp
-    Description:    In this file we have the scheduler
+    Description:    Implements the main logic and scheduler 
+                    for the keyboard controller.
  */
 
 #include "main.h"

@@ -1,6 +1,7 @@
 /*
     File name:      main.h
-    Description:    scheduler header file
+    Description:    Header file declaring structures, functions, 
+                    and library dependencies for the scheduler.
 */
 
 /*

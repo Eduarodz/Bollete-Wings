@@ -1,6 +1,8 @@
 /*
     File name:      calibrations.h
-    Description:    Calibration header file
+    Description:    Stores calibration parameters and hardware 
+                    configurations for buttons, knobs, toggles, 
+                    and the power switch.
 */
 
 /*
