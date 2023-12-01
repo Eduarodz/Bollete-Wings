@@ -9,58 +9,60 @@ void setup() {
 
   Serial.begin(9600);
 
-  Keyboard.begin();
-  InitializePinModes();
+  Initialize_PinModes();
 }
 
 void loop() {
   
-  ReadInputsSendOuput();
+  ReadInputs_SendOutputs();
 
 }
 
-void ReadInputsSendOuput(void)
+void ReadInputs_SendOutputs(void)
 {
   int i;
-
-  for (i = 0; i < Button.NumOfInputs; i++)
+  
+  if((Dtrmn_b_KeyboardActive() == true))
   {
-    if (digitalRead(Button.InputPin[i]) == LOW)
+    for (i = 0; i < Button.NumOfInputs; i++)
     {
-      Keyboard.press(Button.KeyboardMapping[i]);
+      if (digitalRead(Button.InputPin[i]) == LOW)
+      {
+        Keyboard.press(Button.KeyboardMapping[i]);
+      }
+      else
+      {
+        Keyboard.release(Button.KeyboardMapping[i]);
+      }
     }
-    else
-    {
-      Keyboard.release(Button.KeyboardMapping[i]);
-    }
-  }
 
-  for (i = 0; i < Knob.NumOfInputs; i++)
-  {
-    if (digitalRead(Knob.InputPin[i]) == LOW)
+    for (i = 0; i < Knob.NumOfInputs; i++)
     {
-      Keyboard.press(Knob.KeyboardMapping[i]);
+      if (digitalRead(Knob.InputPin[i]) == LOW)
+      {
+        Keyboard.press(Knob.KeyboardMapping[i]);
+      }
+      else
+      {
+        Keyboard.release(Knob.KeyboardMapping[i]);
+      }
     }
-    else
-    {
-      Keyboard.release(Knob.KeyboardMapping[i]);
-    }
-  }
 
-  for (i = 0; i < Toggle.NumOfInputs; i++)
-  {
-    if (digitalRead(Toggle.InputPin[i]) == LOW)
+    for (i = 0; i < Toggle.NumOfInputs; i++)
     {
-      Keyboard.press(Toggle.KeyboardMapping[i]);
-    }
-    else
-    {
-      Keyboard.release(Toggle.KeyboardMapping[i]);
+      if (digitalRead(Toggle.InputPin[i]) == LOW)
+      {
+        Keyboard.press(Toggle.KeyboardMapping[i]);
+      }
+      else
+      {
+        Keyboard.release(Toggle.KeyboardMapping[i]);
+      }
     }
   }
 }
 
-void InitializePinModes(void)
+void Initialize_PinModes(void)
 {
   int i;
 
@@ -78,4 +80,24 @@ void InitializePinModes(void)
   {
     pinMode(Toggle.InputPin[i], INPUT_PULLUP);
   }
+
+  pinMode(powerpin, INPUT_PULLUP);
+}
+
+bool Dtrmn_b_KeyboardActive(void)
+{
+  bool KeyboardActive;
+
+  if(digitalRead(powerpin) == LOW)
+  {
+    Keyboard.begin();
+    KeyboardActive = true;
+  }
+  else
+  {
+    Keyboard.end();
+    KeyboardActive = false;
+  }
+
+  return KeyboardActive;
 }

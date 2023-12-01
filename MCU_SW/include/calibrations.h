@@ -25,9 +25,11 @@ struct HWIO
     Variable Definitions
 */
 
-/* Buttons */
+/* Panel Buttons */
     HWIO Button = {2, {"APEnbl", "APSlct"}, {4, 5} , { 'p', 'o'}};
-/* Knobs */
+/* Panel Knobs */
     HWIO Knob = {2, {"HDGEnbl", "HDGSlct"}, {6, 7}, {'h', 'j'}};
-/* Toggles */
+/* Panel Toggles */
     HWIO Toggle = {2, {"Flaps", "LandingGear"}, {8, 9}, {'f', 'd'}};
+/* Panel On/Off Switch */
+    extern const int powerpin = 10;
